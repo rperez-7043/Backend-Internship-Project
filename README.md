@@ -7,6 +7,7 @@ This is a Django-based web application for sending SMS messages using the Twilio
 ### **Prerequisites**
 1. Python 3.x installed on your machine.
 2. Twilio account and API credentials (Account SID, Auth Token and My Twilio phone number).
+![Screenshot](readme_media\screenshot.png)
 3. Install `pip` (Python package installer) if not already installed.
 
 ---
@@ -26,7 +27,7 @@ This is a Django-based web application for sending SMS messages using the Twilio
 
 3. **Install Dependencies**:
     ```bash
-    pip install -r requirements.txt
+    py -m pip install -r requirements.txt
     ```
 
 4. **Configure Environment Variables**:
@@ -36,25 +37,24 @@ This is a Django-based web application for sending SMS messages using the Twilio
      TWILIO_AUTH_TOKEN=your_auth_token_here
      TWILIO_PHONE_NUMBER=your_twilio_phone_number_here
      ```
+     ![Screenshot](readme_media\screenshot_2.png)
    - Replace the placeholders with your actual Twilio credentials.
 
-5. **Run Database Migrations**:
-    ```bash
-    python manage.py migrate
-    ```
-
-6. **Run the Server**:
+5. **Run the Server**:
     ```bash
     py manage.py runserver
     ```
 
-7. **Access the Application**:
+6. **Access the Application**:
    - Open your browser and navigate to: [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ---
 
 ### **Usage**
-1. Enter the recipient's phone number and your message in the form.
+1. Enter the recipient's phone number and your message in the form. If you are using a Twilio free trial account, there are specific restrictions and requirements to be aware of:
+- You can only send SMS messages to phone numbers that are verified as Caller IDs in your Twilio account.
+- Verification involves receiving a one-time passcode (OTP) on the desired number, which must be validated in your Twilio account settings.
+- Twilio’s Verified Caller ID service is only available for the US1 data routing region at this time.
 2. Click "Send SMS."
 3. View the status and details of the message on the response page.
 
@@ -64,13 +64,3 @@ This is a Django-based web application for sending SMS messages using the Twilio
 - Django
 - Twilio Python SDK
 - dotenv for environment variables
-
----
-
-### **License**
-This project is licensed under [your license here].
-
----
-
-### **Contributing**
-Feel free to submit pull requests or open issues to improve the project.
