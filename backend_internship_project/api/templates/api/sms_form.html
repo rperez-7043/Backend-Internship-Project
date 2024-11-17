@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSM Form</title>
+    <style>
+        html {
+            color: whitesmoke;
+
+        }
+
+        body {
+            background-color: black;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Send an SMS &lt;3</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="phone_number">Phone Number:</label><br>
+        <input type="text" id="phone_number" name="phone_number" placeholder="+1XXXXXXXXXX" size="20"
+            value="{{ phone_number|default:'' }}" required><br><br>
+
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="5" cols="23"
+            placeholder="Can you imagine an imaginary menagerie manager imagining managing an imaginary menagerie?"
+            required>{{ message|default:'' }}</textarea><br><br>
+
+        <button type="submit">Send SMS</button>
+    </form>
+
+    {% if message_info %}
+    <h2>Message Information</h2>
+    <table>
+        <tr>
+            <th>Message SID</th>
+            <td>{{ message_info.sid }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ message_info.status }}</td>
+        </tr>
+        <tr>
+            <th>Body</th>
+            <td>{{ message_info.body }}</td>
+        </tr>
+        <tr>
+            <th>From</th>
+            <td>{{ message_info.from_ }}</td>
+        </tr>
+        <tr>
+            <th>To</th>
+            <td>{{ message_info.to }}</td>
+        </tr>
+        <tr>
+            <th>Date Created</th>
+            <td>{{ message_info.date_created }}</td>
+        </tr>
+        {% if message_info.date_sent %}
+        <tr>
+            <th>Date Sent</th>
+            <td>{{ message_info.date_sent }}</td>
+        </tr>
+        {% endif %}
+        {% if message_info.error_message %}
+        <tr>
+            <th>Error Message</th>
+            <td>{{ message_info.error_message }}</td>
+        </tr>
+        {% endif %}
+        {% if message_info.price %}
+        <tr>
+            <th>Price</th>
+            <td>{{ message_info.price }} {{ message_info.price_unit }}</td>
+        </tr>
+        {% endif %}
+        {% if message_info.num_segments %}
+        <tr>
+            <th>Number of Segments</th>
+            <td>{{ message_info.num_segments }}</td>
+        </tr>
+        {% endif %}
+    </table>
+
+    {% endif %}
+
+</body>
+
+</html>
